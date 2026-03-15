@@ -173,26 +173,30 @@ dig app-stateful-set.default.svc.cluster.local                        # wpisy DN
 helm install my-release oci://registry-1.docker.io/bitnamicharts/mysql -f my-values.yaml                    # instalacja z wykorzystaniem values
 helm install my-release oci://registry-1.docker.io/bitnamicharts/mysql --set prop=value                     # instalacja z wykorzystaniem set
 helm list                                                                                                   # listing zainstalowanych aplikacji (releases) w aktualnym namespace
-helm search hub mysql                                                                                       # wyszukiwanie chart-a mysql w hubie
-helm pull oci://registry-1.docker.io/bitnamicharts/mysql                                                    # pobranie charta mysql w ostatniej wersji
-helm pull oci://registry-1.docker.io/bitnamicharts/mysql --untar                                            # pobranie charta mysql w ostatniej wersji z automatycznym rozpakowaniem
-helm install mysql-db oci://registry-1.docker.io/bitnamicharts/mysql                                        # instalacja ostatniej wersji z domyślną konfiguracją
+helm search hub podinfo                                                                                     # wyszukiwanie chart-a podinfo w hubie
+kubectl cofig set-context --current --namespace=helm
+helm pull oci://ghcr.io/stefanprodan/charts/podinfo --version 6.11.0                                        # pobranie charta podinfo w konkretnej wersji
+helm pull oci://ghcr.io/stefanprodan/charts/podinfo --version 6.11.0 --untar                                # pobranie charta podinfo w konkretnej wersji z automatycznym rozpakowaniem
+helm install minikube-podinfo oci://ghcr.io/stefanprodan/charts/podinfo --version 6.11.0                    # instalacja konkretnej wersji z domyślną konfiguracją
 kubectl get all                                                                                             # pobranie wszystkich obiektów z aktualnego namespace
-helm pull oci://ghcr.io/stefanprodan/charts/podinfo --untar                                                 # pobranie charta podinfo
 helm list --all-namespaces                                                                                  # listing zainstalowanych aplikacji (releases) we wszystkich namespace
-helm upgrade mypodinfo oci://ghcr.io/stefanprodan/charts/podinfo --set replicaCount=3                       # upgrade charta z ustawienie liczby replik na 3
-helm diff revision mypodinfo 1                                                                              # różnice pomiędzy rewizjami
-helm rollback mypodinfo 1                                                                                   # przywrócenie do konkretnej rewizji
-helm uninstall mypodinfo                                                                                    # odinstalowanie aplikacji (release)
-helm install blog --set wordpressUsername=admin --set wordpressPassword=password --set mariadb.auth.rootPassword=secretpassword oci://registry-1.docker.io/bitnamicharts/wordpress --version 16.1.33    # instalacja wordpress-a
-helm diff upgrade blog oci://registry-1.docker.io/bitnamicharts/wordpress --version 16.1.33 --values=blog-values.yaml       # podgląd zmian przed upgrade charta
-helm template blog oci://registry-1.docker.io/bitnamicharts/wordpress --version 16.1.33 --values=blog-values.yaml           # wygnerowanie manifestów lokalnie
-helm upgrade blog oci://registry-1.docker.io/bitnamicharts/wordpress --version 16.1.33 --values=blog-values.yaml            # upgrade release-u
-helm upgrade blog oci://registry-1.docker.io/bitnamicharts/wordpress --version 16.1.33 --values=blog-values.yaml --install  # upgrade lub instalacja jeżeli release nie istnieje
-mkcert --key-file key.pem --cert-file cert.pem wordpress.127.0.0.1.nip.io                                   # wygeneruj klucz i certyfikat za pomocą narzędzia mkcert
-kubectl create secret tls blog-tls --key key.pem --cert cert.pem                                            # utwórz secret
-helm template nginx-dev nginx                                                                               # template lokalnego charta (w folderze nginx)
-helm install nginx-dev nginx                                                                                # instalacja lokalnego charta (w folderze nginx) 
+
+helm upgrade minikube-podinfo oci://ghcr.io/stefanprodan/charts/podinfo --version 6.11.0 --set replicaCount=3      # upgrade charta z ustawienie liczby replik na 3
+helm history minikube-podinfo                                                                                      # historia rewizji
+helm rollback minikube-podinfo 1                                                                                   # przywrócenie do konkretnej rewizji
+helm uninstall minikube-podinfo                                                                                    # odinstalowanie aplikacji (release)
+
+helm pull oci://ghcr.io/grafana-community/helm-charts/grafana --version 11.3.2 --untar                                                  # pobranie charta grafana w konkretnej wersji
+helm install grafana oci://ghcr.io/grafana-community/helm-charts/grafana --version 11.3.2                                               # instalacja grafany
+helm template grafana oci://ghcr.io/grafana-community/helm-charts/grafana --version 11.3.2 --values=monitoring-values.yaml              # wygnerowanie manifestów lokalnie
+helm upgrade grafana oci://ghcr.io/grafana-community/helm-charts/grafana --version 11.3.2 --values=monitoring-values.yaml               # upgrade release-u
+helm upgrade grafana oci://ghcr.io/grafana-community/helm-charts/grafana --version 11.3.2 --values=monitoring-values.yaml --install     # upgrade lub instalacja jeżeli release nie istnieje
+
+mkcert --key-file key.pem --cert-file cert.pem grafana.127.0.0.1.nip.io                                     # wygeneruj klucz i certyfikat za pomocą narzędzia mkcert
+kubectl create secret tls grafana-tls --key key.pem --cert cert.pem                                         # utwórz secret
+
+helm template app-dev nginx                                                                                 # template lokalnego charta (w folderze nginx)
+helm install app-dev nginx                                                                                  # instalacja lokalnego charta (w folderze nginx) 
 ```
 
 ### Jobs && CronJobs

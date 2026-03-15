@@ -1,4 +1,4 @@
 configMap:
   name: app-configuration
-  firstName: Kubernetes
-  lastName: Hello
+  firstName: Hello
+  secondName: World

@@ -4,4 +4,4 @@ metadata:
   name: {{ .Values.configMap.name }}
 data:
   FIRST_NAME: {{ .Values.configMap.firstName }}
-  LAST_NAME: {{ .Values.configMap.lastName }}
+  SECOND_NAME: {{ .Values.configMap.secondName }}
