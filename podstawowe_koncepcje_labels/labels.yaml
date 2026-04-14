@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: nginx:1.23.4
+      image: nginx:trixie-perl
 ---
 apiVersion: v1
 kind: Pod

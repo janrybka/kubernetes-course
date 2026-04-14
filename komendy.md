@@ -98,7 +98,7 @@ kubectl delete namespace blue                                   # usunięnie nam
 kubectl config view                                             # wyświetlenie konfiguracji kubectl
 kubectl cofig set-context --current --namespace=blue            # ustawienie domyślego namespace
 kubectl get pods --all-namespaces                               # pobranie podów z wszystkich namespace
-kubectl run webserver --image=nginx:1.23.4 --namespace=default  # utworzenie poda w namespace default
+kubectl run webserver --image=nginx:trixie-perl --namespace=default  # utworzenie poda w namespace default
 kubectl api-resources --namespaced=true                         # pobranie api-resource namespaced scope
 kubectl api-resources --na mespaced=false                       # pobranie api-resource cluster scope
 kubectl exec -it toolbox -n tools -- bash                       # interactive shell na konkretnym podzie w konkretnym namespace
