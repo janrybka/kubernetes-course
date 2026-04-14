@@ -5,6 +5,6 @@ metadata:
 spec:
   containers:
     - name: nginx1
-      image: nginx:trixie-perl # port 80
+      image: nginx:trixie # port 80
     - name: nginx2
-      image: nginx:trixie-perl # port 80
+      image: nginx:trixie # port 80

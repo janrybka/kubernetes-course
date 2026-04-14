@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginxd
-        image: nginx:trixie-perl
+        image: nginx:trixie
         ports:
         - containerPort: 80

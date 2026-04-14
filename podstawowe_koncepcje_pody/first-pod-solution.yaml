@@ -5,6 +5,6 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: nginx:trixie-perl # port 80
+      image: nginx:trixie # port 80
     - name: tomcat
       image: tomcat:9.0-jdk17-temurin # port 8080

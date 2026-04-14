@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: nginx:trixie-perl
+      image: nginx:trixie
       ports:
         - containerPort: 80
     - name: echo

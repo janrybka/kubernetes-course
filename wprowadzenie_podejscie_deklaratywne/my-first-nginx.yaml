@@ -4,5 +4,5 @@ metadata:
   name: my-first-nginx
 spec:
   containers:
-  - image: nginx:trixie-perl
+  - image: nginx:trixie
     name: nginx
